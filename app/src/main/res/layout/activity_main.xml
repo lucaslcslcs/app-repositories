@@ -15,12 +15,13 @@
         app:title="@string/app_name" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_repos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:listitem="@layout/item_repo"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:itemCount="5"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+        tools:listitem="@layout/item_repo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,12 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.dio.app.repositories.data.model.Repo
 import com.dio.app.repositories.domain.ListUserRepositoriesUseCase
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val listUserRepositoriesUseCase: ListUserRepositoriesUseCase
-) : ViewModel {
+class MainViewModel(
+    private val listUserRepositoriesUseCase: ListUserRepositoriesUseCase
+) : ViewModel() {
 
     private val _repos = MutableLiveData<State>()
     val repos: LiveData<State> = _repos
@@ -27,16 +27,14 @@ class MainViewModel(private val listUserRepositoriesUseCase: ListUserRepositorie
                     _repos.postValue(State.Error(it))
                 }
                 .collect {
-                    _repos.postValue(State.Sucess(it))
+                    _repos.postValue(State.Success(it))
                 }
         }
     }
 
     sealed class State {
-        object  Loading : State()
-
-        data class Sucess(val list: List<Repo>) : State()
-
+        object Loading : State()
+        data class Success(val list: List<Repo>) : State()
         data class Error(val error: Throwable) : State()
     }
 
